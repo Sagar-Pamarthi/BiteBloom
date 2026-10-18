@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+    <welcome-file-list> 
+        <welcome-file>restaurants</welcome-file>
+    </welcome-file-list>
+
+    <servlet>
+        <display-name>CheckoutController</display-name>
+        <servlet-name>CheckoutController</servlet-name>
+        <servlet-class>com.tap.controller.CheckoutController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CheckoutController</servlet-name>
+        <url-pattern>/CheckoutController</url-pattern>
+    </servlet-mapping>
+
+</web-app>

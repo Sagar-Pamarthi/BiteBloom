@@ -1,0 +1,203 @@
+
+/* Background Image */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("../images/signin.png") !important;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -3;
+}
+
+/* Dark Overlay */
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: -2;
+}
+
+/* Animated Gradient */
+
+.gradient {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(240, 184, 128, 0.25),
+        rgba(255, 0, 80, 0.20),
+        rgba(255, 180, 0, 0.20)
+    );
+    animation: move 8s linear infinite alternate;
+    z-index: -1;
+}
+
+@keyframes move {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.2);
+    }
+}
+
+/* Glass Card */
+
+.login {
+    width: 400px;
+    padding: 45px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+    color: white;
+}
+
+/* Heading */
+
+.login h1 {
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+.login p {
+    color: #f2f2f2;
+    margin-bottom: 30px;
+}
+
+/* Inputs */
+
+.input {
+    margin-bottom: 20px;
+}
+
+.input input {
+    width: 100%;
+    padding: 16px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input input::placeholder {
+    color: #eeeeee;
+}
+
+.input input:focus {
+    border-color: #f0b880;
+    background: rgba(255, 255, 255, 0.20);
+}
+
+/* Row */
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.row a {
+    color: #f0b880;
+    text-decoration: none;
+}
+
+/* Bottom */
+
+.bottom {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.bottom a {
+    color: #f0b880;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Password Box */
+
+.password-box {
+    position: relative;
+}
+
+.password-box input {
+    width: 100%;
+    padding: 16px 50px 16px 16px;
+}
+
+/* Password Visibility Toggle */
+
+.toggle-password {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 20px;
+    color: #ffffff;
+    user-select: none;
+    transition: 0.3s;
+}
+
+.toggle-password:hover {
+    color: #f0b880;
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    .login {
+        width: 90%;
+        padding: 30px;
+    }
+
+    .login h1 {
+        font-size: 28px;
+    }
+
+    button {
+        padding: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login {
+        width: 95%;
+        padding: 25px;
+        border-radius: 20px;
+    }
+
+    .login h1 {
+        font-size: 24px;
+    }
+
+    .login p {
+        font-size: 14px;
+    }
+
+    .input input,
+    textarea {
+        font-size: 14px;
+        padding: 14px 14px 14px 45px;
+    }
+}
+
+.login-page {
+    height: 100vh;
+    overflow: hidden;
+}
