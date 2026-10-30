@@ -211,4 +211,37 @@ public class MenuDAOImpl implements MenuDAO{
 
         return menus;
     }
+	
+	@Override
+	public List<Integer> getRestaurantIdsByFoodCategory(String foodCategory) {
+
+	    List<Integer> restaurantIds = new ArrayList<>();
+
+	    String sql =
+	        "SELECT DISTINCT restaurant_id FROM menu " +
+	        "WHERE (LOWER(TRIM(category)) = LOWER(?) " +
+	        "OR LOWER(itemName) LIKE LOWER(?)) " +
+	        "AND is_available = 1 " +
+	        "AND deletedAt IS NULL";
+
+	    try (Connection con = DBConnection.getConnection();
+	         PreparedStatement ps = con.prepareStatement(sql)) {
+
+	        ps.setString(1, foodCategory.trim());
+	        ps.setString(2, "%" + foodCategory.trim() + "%");
+
+	        try (ResultSet rs = ps.executeQuery()) {
+	            while (rs.next()) {
+	                restaurantIds.add(rs.getInt("restaurant_id"));
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        throw new RuntimeException(
+	            "Unable to find restaurants for food category: "
+	                + foodCategory, e);
+	    }
+
+	    return restaurantIds;
+	}
 }

@@ -1,4 +1,30 @@
-body::before {
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+
+/* =====================================
+   BITEBLOOM SIGNUP PAGE
+   Matched to signin.css
+   ===================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body.signup-page {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    color: #fff8ec;
+    font-family: "DM Sans", sans-serif;
+    background: transparent;
+    isolation: isolate;
+}
+
+/* Background image */
+body.signup-page::before {
     content: "";
     position: fixed;
     inset: 0;
@@ -6,288 +32,257 @@ body::before {
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     z-index: -3;
+    pointer-events: none;
 }
 
-/* Dark Overlay */
-
-body::after{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.45);
-    z-index:-2;
+/* Dark overlay - same as signin */
+body.signup-page::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: -2;
+    pointer-events: none;
 }
 
-/* Animated Gradient */
-
-.gradient{
-    position:fixed;
-    inset:0;
-    background:
-    linear-gradient(135deg,
-    rgba(240, 184, 128, 0.25),
-    rgba(255,0,80,.20),
-    rgba(255,180,0,.20));
-    animation:move 8s linear infinite alternate;
-    z-index:-1;
-}
-@keyframes move{
-
-0%{
-transform:scale(1);
+/* Animated gradient - same colors and timing */
+.signup-page .gradient {
+    position: fixed;
+    inset: -10%;
+    background: linear-gradient(
+        135deg,
+        rgba(240, 184, 128, 0.25),
+        rgba(255, 0, 80, 0.20),
+        rgba(255, 180, 0, 0.20)
+    );
+    animation: move 8s linear infinite alternate;
+    z-index: -1;
+    pointer-events: none;
 }
 
-100%{
-transform:scale(1.2);
+@keyframes move {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.2);
+    }
 }
 
+/* Signup form layout */
+.signup-page .signup-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: 28px 18px;
 }
 
-.signup-container{
-
-    min-height:100vh;
-
-    height:auto;
-
-    padding:60px 20px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    overflow-y:auto;
-
-}
-
-.signup-card{
-
-    width:390px; 
-
-    padding:30px;
-
-    border-radius:30px;
-
-    background:rgba(255,255,255,.12);
-
-    backdrop-filter:blur(18px);
-
-    -webkit-backdrop-filter:blur(18px);
-
-    border:1px solid rgba(255,255,255,.25);
-
+/* Dark glass card - same design as signin */
+.signup-page .signup-card {
+    width: 100%;
+    max-width: 450px;
+    padding: 38px 40px;
+    border: 1px solid rgba(255, 220, 177, 0.25);
+    border-radius: 30px;
+    background: rgba(28, 17, 12, 0.76);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
     box-shadow:
-    0 15px 40px rgba(0,0,0,.35);
-
-    color:white;
-
-}
-.login h1{
-
-font-size:34px;
-margin-bottom:10px;
-
+        0 15px 40px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    color: #fff8ec;
 }
 
-.login p{
-
-color:#f2f2f2;
-margin-bottom:30px;
-
-}
-/* Address */
-
-.input textarea{
-
-    width:100%;
-
-    padding:16px;
-
-    border-radius:15px;
-
-    border:1px solid rgba(255,255,255,.25);
-
-    background:rgba(255,255,255,.15);
-
-    color:white;
-
-    font-size:15px;
-
-    outline:none;
-
-    resize:none;
-
-    transition:.3s;
-
+/* Heading */
+.signup-page .signup-card h1 {
+    margin: 0 0 10px;
+    color: #fff8ec;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(29px, 4vw, 36px);
+    line-height: 1.2;
+    font-weight: 700;
 }
 
-.input textarea::placeholder{
-
-    color:#eeeeee;
-
+/* Introductory text */
+.signup-page .signup-card > p:not(.bottom) {
+    margin: 0 0 24px;
+    color: rgba(255, 248, 236, 0.78);
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
 }
 
-.input textarea:focus{
-
-    border-color:#ff9800;
-
-    background:rgba(255,255,255,.20);
-
-}
-.input{
-
-margin-bottom:20px;
-
+/* Field spacing */
+.signup-page .input {
+    width: 100%;
+    margin-bottom: 15px;
 }
 
-.input input{
-
-width:100%;
-
-padding:16px;
-
-border-radius:15px;
-
-border:1px solid rgba(255,255,255,.25);
-
-background:rgba(255,255,255,.15);
-
-color:white;
-
-font-size:15px;
-
-outline:none;
-
-transition:.3s;
-
+/* Optional labels, if included in signup.jsp */
+.signup-page .input label {
+    display: block;
+    margin: 0 0 8px;
+    color: #ffe2bc;
+    font-size: 13px;
+    font-weight: 600;
 }
 
-.input input::placeholder{
-
-color:#eeeeee;
-
+/* Input fields */
+.signup-page .input input {
+    display: block;
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 221, 185, 0.24);
+    border-radius: 12px;
+    outline: none;
+    background: rgba(255, 248, 236, 0.08);
+    color: #fff8ec;
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
 
-.input input:focus{
-
-border-color:#ff9800;
-
-background:rgba(255,255,255,.20);
-
+.signup-page .input input::placeholder {
+    color: rgba(255, 248, 236, 0.48);
+    opacity: 1;
 }
 
-/* Bottom */
-
-.bottom{
-
-margin-top:25px;
-
-text-align:center;
-
-font-size:15px;
-
+/* Focus effect */
+.signup-page .input input:focus {
+    border-color: #ffbf69;
+    background: rgba(255, 248, 236, 0.12);
+    box-shadow: 0 0 0 3px rgba(255, 191, 105, 0.14);
 }
 
-.bottom a{
-
-color:#ffd54f;
-
-text-decoration:none;
-
-font-weight:600;
-
+/* Address textarea */
+.signup-page .input textarea {
+    display: block;
+    width: 100%;
+    min-height: 85px;
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 221, 185, 0.24);
+    border-radius: 12px;
+    outline: none;
+    resize: vertical;
+    background: rgba(255, 248, 236, 0.08);
+    color: #fff8ec;
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
 
-/* Scrollbar */
-
-.signup-container::-webkit-scrollbar{
-
-    width:6px;
-
+.signup-page .input textarea::placeholder {
+    color: rgba(255, 248, 236, 0.48);
+    opacity: 1;
 }
 
-.signup-container::-webkit-scrollbar-thumb{
+.signup-page .input textarea:focus {
+    border-color: #ffbf69;
+    background: rgba(255, 248, 236, 0.12);
+    box-shadow: 0 0 0 3px rgba(255, 191, 105, 0.14);
+}
 
-    background:rgba(255,255,255,.3);
+/* Password field wrapper */
+.signup-page .password-box {
+    width: 100%;
+}
 
-    border-radius:20px;
+/* Signup button - same as signin */
+.signup-page .signup-card button {
+    display: block;
+    width: 100%;
+    margin-top: 22px;
+    padding: 14px 18px;
+    border: 0;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ffbf69, #f49a39);
+    color: #351b0d;
+    font-family: "DM Sans", sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 8px 22px rgba(244, 154, 57, 0.22);
+    transition: filter 0.2s ease, box-shadow 0.2s ease;
+}
 
+.signup-page .signup-card button:hover {
+    filter: brightness(1.06);
+    box-shadow: 0 10px 26px rgba(244, 154, 57, 0.32);
+}
+
+/* Bottom login prompt */
+.signup-page .bottom {
+    margin: 22px 0 0;
+    color: rgba(255, 248, 236, 0.78);
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.signup-page .bottom a {
+    color: #ffbf69;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.signup-page .bottom a:hover {
+    color: #ffd9a4;
+    text-decoration: underline;
 }
 
 /* Responsive */
+@media (max-width: 768px) {
+    .signup-page .signup-card {
+        padding: 34px 30px;
+    }
+}
 
-@media(max-width:500px){
-
-    .signup-container{
-
-        padding:30px 15px;
-
+@media (max-width: 480px) {
+    .signup-page .signup-container {
+        padding: 18px 14px;
+        align-items: center;
     }
 
-   .signup-card{
-
-        width:100%;
-
-        padding:25px 20px;
-
+    .signup-page .signup-card {
+        padding: 28px 22px;
+        border-radius: 24px;
     }
 
-    .signup-card h1{
-
-        font-size:26px;
-
+    .signup-page .signup-card > p:not(.bottom) {
+        margin-bottom: 18px;
     }
 
-.signup-card p{
-
-    margin-bottom:22px;
-
-    font-size:14px;
-
+    .signup-page .signup-card button {
+        padding: 13px 14px;
+    }
 }
 
-.signup-card .input{
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .signup-page .gradient {
+        animation: none;
+    }
 
-    margin-bottom:15px;
-
-}
-
-.signup-card .input input,
-.signup-card .input textarea{
-
-    padding:13px 16px;
-
-    font-size:14px;
-
-}
-
-.signup-card textarea{
-
-    height:75px;
-
-}
-
-.signup-card button{
-
-    padding:14px;
-
-    font-size:16px;
-
-}
-
-.signup-card .bottom{
-
-    margin-top:18px;
-
-    font-size:14px;
-
-}
-
-}
-
-.signup-page{
-    min-height:100vh;
-    overflow-y:auto;
+    .signup-page .input input,
+    .signup-page .input textarea,
+    .signup-page .signup-card button {
+        transition: none;
+    }
 }

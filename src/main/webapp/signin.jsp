@@ -1,84 +1,62 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%!
+    private String escapeHtml(Object value) {
+        if (value == null) return "";
+        return value.toString().replace("&", "&amp;").replace("<", "&lt;")
+                .replace(">", "&gt;").replace("\"", "&quot;").replace("'", "&#39;");
+    }
+%>
+<%
+    String contextPath = request.getContextPath();
+%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Signin</title>
-
-<link rel="stylesheet"
-      href="<%=request.getContextPath()%>/css/style.css">
-
-<link rel="stylesheet"
-      href="<%=request.getContextPath()%>/css/signin.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiteBloom | Sign In</title>
+    <link rel="icon"
+          type="image/png"
+          href="<%= request.getContextPath() %>/images/bitebloom-favicon.png">
+    <link rel="stylesheet" href="<%= contextPath %>/css/common.css">
+    <link rel="stylesheet" href="<%= contextPath %>/css/signin.css">
 </head>
-
 <body class="login-page">
+    <div class="gradient" aria-hidden="true"></div>
+    <main class="auth-container">
+        <section class="auth-card login-card" aria-labelledby="signin-title">
+            <p class="brand-mark">BITE<span>BLOOM</span></p>
+            <h1 id="signin-title">Welcome Back!</h1>
+            <p class="subtitle">Turn Your Hunger into Happiness with Us.</p>
 
-<div class="gradient"></div>
+            <% if (request.getAttribute("resetSuccess") != null) { %>
+                <p class="message success-message"><%= escapeHtml(request.getAttribute("resetSuccess")) %></p>
+            <% } %>
+            <% if (request.getAttribute("loginError") != null) { %>
+                <p class="message error-message"><%= escapeHtml(request.getAttribute("loginError")) %></p>
+            <% } %>
 
-<div class="container">
+            <form action="<%= contextPath %>/signin" method="post" class="auth-form">
+                <label for="email">Email address</label>
+                <div class="input-wrap">
+                    <input type="email" id="email" name="email" autocomplete="email"
+                           placeholder="you@example.com" required>
+                </div>
+                <label for="password">Password</label>
+                <div class="input-wrap">
+                    <input type="password" id="password" name="password" autocomplete="current-password"
+                           placeholder="Enter your password" required>
+                </div>
+                <div class="form-options">
+                    <a class="text-link" href="<%= contextPath %>/forgot-password">Forgot password?</a>
+                </div>
+                <button type="submit" class="primary-button">Sign In</button>
+            </form>
 
-    <div class="login">
-
-        <h1>Welcome Back!</h1>
-
-        <p>Turn Your Hunger into Happiness with Us.</p>
-
-        <%
-            String loginError = (String)request.getAttribute("loginError");
-            if(loginError != null){
-        %>
-
-            <p style="color:#ffb3b3;">
-                <%=loginError%>
+            <p class="register-prompt">Don't have an account?
+                <a class="text-link" href="<%= contextPath %>/signup.jsp">Register Here</a>
             </p>
-
-        <%
-            }
-        %>
-
-        <form action="<%=request.getContextPath()%>/signin" method="post">
-
-            <div class="input">
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    required>
-            </div>
-
-            <div class="input password-box">
-
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    required>
-
-            </div>
-
-            <button type="submit">
-                Login
-            </button>
-
-        </form>
-
-        <div class="bottom">
-
-            Don't have an account?
-
-            <a href="signup.jsp">
-                Register Here
-            </a>
-
-        </div>
-
-    </div>
-
-</div>
-
+        </section>
+    </main>
 </body>
 </html>

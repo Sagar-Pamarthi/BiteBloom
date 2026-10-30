@@ -1,7 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
 
-/* Background Image */
+/* BiteBloom auth-page styling. Auth pages load common.css plus this file only; no style.css. */
+* { box-sizing: border-box; }
 
-body::before {
+body.login-page {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    color: #fff8ec;
+    font-family: "DM Sans", sans-serif;
+    background: transparent;
+    isolation: isolate;
+}
+
+/* Keep the requested sign-in background image settings unchanged. */
+body.login-page::before {
     content: "";
     position: fixed;
     inset: 0;
@@ -9,195 +25,93 @@ body::before {
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     z-index: -3;
 }
 
-/* Dark Overlay */
-
-body::after {
+/* Keep the requested dark overlay unchanged. */
+body.login-page::after {
     content: "";
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(0,0,0,0.45);
     z-index: -2;
+    pointer-events: none;
 }
 
-/* Animated Gradient */
-
-.gradient {
+/* Keep the requested animated gradient colors and animation unchanged. */
+body.login-page .gradient {
     position: fixed;
-    inset: 0;
-    background: linear-gradient(
-        135deg,
-        rgba(240, 184, 128, 0.25),
-        rgba(255, 0, 80, 0.20),
-        rgba(255, 180, 0, 0.20)
-    );
+    inset: -10%;
+    background: linear-gradient(135deg, rgba(240,184,128,0.25), rgba(255,0,80,0.20), rgba(255,180,0,0.20));
     animation: move 8s linear infinite alternate;
     z-index: -1;
+    pointer-events: none;
 }
 
 @keyframes move {
-    0% {
-        transform: scale(1);
-    }
-
-    100% {
-        transform: scale(1.2);
-    }
+    from { transform: scale(1); }
+    to { transform: scale(1.2); }
 }
 
-/* Glass Card */
-
-.login {
-    width: 400px;
-    padding: 45px;
-    border-radius: 30px;
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
-    color: white;
-}
-
-/* Heading */
-
-.login h1 {
-    font-size: 34px;
-    margin-bottom: 10px;
-}
-
-.login p {
-    color: #f2f2f2;
-    margin-bottom: 30px;
-}
-
-/* Inputs */
-
-.input {
-    margin-bottom: 20px;
-}
-
-.input input {
-    width: 100%;
-    padding: 16px;
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    background: rgba(255, 255, 255, 0.15);
-    color: white;
-    font-size: 15px;
-    outline: none;
-    transition: 0.3s;
-}
-
-.input input::placeholder {
-    color: #eeeeee;
-}
-
-.input input:focus {
-    border-color: #f0b880;
-    background: rgba(255, 255, 255, 0.20);
-}
-
-/* Row */
-
-.row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    font-size: 14px;
-}
-
-.row a {
-    color: #f0b880;
-    text-decoration: none;
-}
-
-/* Bottom */
-
-.bottom {
-    margin-top: 25px;
-    text-align: center;
-    font-size: 15px;
-}
-
-.bottom a {
-    color: #f0b880;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-/* Password Box */
-
-.password-box {
+.login-page .auth-container {
     position: relative;
-}
-
-.password-box input {
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    padding: 16px 50px 16px 16px;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: 28px 18px;
 }
 
-/* Password Visibility Toggle */
-
-.toggle-password {
-    position: absolute;
-    right: 18px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    font-size: 20px;
-    color: #ffffff;
-    user-select: none;
-    transition: 0.3s;
+.login-page .auth-card {
+    width: 100%;
+    max-width: 430px;
+    padding: 38px 40px;
+    border: 1px solid rgba(255, 220, 177, 0.25);
+    border-radius: 30px;
+    background: rgba(28, 17, 12, 0.76);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    color: #fff8ec;
 }
 
-.toggle-password:hover {
-    color: #f0b880;
-}
-
-/* Responsive Design */
+.login-page .auth-card-compact { max-width: 450px; padding-top: 34px; padding-bottom: 32px; }
+.login-page .brand-mark { margin: 0 0 13px; color: #ffbf69; font-size: 12px; font-weight: 800; letter-spacing: 3px; }
+.login-page .brand-mark span { color: #fff8ec; }
+.login-page .auth-card h1 { margin: 0 0 10px; color: #fff8ec; font-family: "Playfair Display", Georgia, serif; font-size: clamp(29px, 4vw, 36px); line-height: 1.2; font-weight: 700; }
+.login-page .subtitle { margin: 0 0 24px; color: rgba(255, 248, 236, 0.78); font-family: "DM Sans", sans-serif; font-size: 14px; line-height: 1.65; }
+.login-page .auth-form label { display: block; margin: 15px 0 8px; color: #ffe2bc; font-size: 13px; font-weight: 600; }
+.login-page .input-wrap { width: 100%; }
+.login-page .input-wrap input { display: block; width: 100%; min-height: 46px; padding: 12px 14px; border: 1px solid rgba(255, 221, 185, 0.24); border-radius: 12px; outline: none; background: rgba(255, 248, 236, 0.08); color: #fff8ec; font-family: "DM Sans", sans-serif; font-size: 14px; transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease; }
+.login-page .input-wrap input::placeholder { color: rgba(255, 248, 236, 0.48); }
+.login-page .input-wrap input:focus { border-color: #ffbf69; background: rgba(255, 248, 236, 0.12); box-shadow: 0 0 0 3px rgba(255, 191, 105, 0.14); }
+.login-page .input-wrap input:-webkit-autofill,
+.login-page .input-wrap input:-webkit-autofill:hover,
+.login-page .input-wrap input:-webkit-autofill:focus { -webkit-text-fill-color: #fff8ec; transition: background-color 9999s ease-in-out 0s; box-shadow: 0 0 0 1000px rgba(48, 29, 20, 0.95) inset; }
+.login-page .form-options { display: flex; justify-content: flex-end; margin: 12px 0 20px; }
+.login-page .text-link { color: #ffbf69; font-weight: 700; text-decoration: none; transition: color 0.2s ease; }
+.login-page .text-link:hover { color: #ffd9a4; text-decoration: underline; }
+.login-page .form-options .text-link { font-size: 13px; }
+.login-page .primary-button { display: block; width: 100%; margin-top: 22px; padding: 14px 18px; border: 0; border-radius: 12px; background: linear-gradient(135deg, #ffbf69, #f49a39); color: #351b0d; font-family: "DM Sans", sans-serif; font-size: 15px; font-weight: 800; text-align: center; text-decoration: none; cursor: pointer; box-shadow: 0 8px 22px rgba(244, 154, 57, 0.22); transition: filter 0.2s ease, box-shadow 0.2s ease; }
+.login-page .primary-button:hover { filter: brightness(1.06); box-shadow: 0 10px 26px rgba(244, 154, 57, 0.32); }
+.login-page .register-prompt { margin: 22px 0 0; color: rgba(255, 248, 236, 0.78); text-align: center; font-size: 12px; line-height: 1.7; }
+.login-page .register-prompt .text-link { margin-left: 3px; }
+.login-page .message { margin: 0 0 14px; padding: 10px 12px; border-radius: 10px; font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }
+.login-page .success-message { color: #e9ffdc; border: 1px solid rgba(142, 224, 112, 0.35); background: rgba(55, 112, 37, 0.25); }
+.login-page .error-message { color: #ffe1d8; border: 1px solid rgba(255, 128, 104, 0.35); background: rgba(145, 40, 28, 0.25); }
 
 @media (max-width: 768px) {
-    .login {
-        width: 90%;
-        padding: 30px;
-    }
-
-    .login h1 {
-        font-size: 28px;
-    }
-
-    button {
-        padding: 14px;
-    }
+    .login-page .auth-card { padding: 34px 30px; }
+    .login-page .auth-card-compact { padding-top: 30px; padding-bottom: 28px; }
 }
 
 @media (max-width: 480px) {
-    .login {
-        width: 95%;
-        padding: 25px;
-        border-radius: 20px;
-    }
-
-    .login h1 {
-        font-size: 24px;
-    }
-
-    .login p {
-        font-size: 14px;
-    }
-
-    .input input,
-    textarea {
-        font-size: 14px;
-        padding: 14px 14px 14px 45px;
-    }
-}
-
-.login-page {
-    height: 100vh;
-    overflow: hidden;
+    .login-page .auth-container { padding: 18px 14px; align-items: center; }
+    .login-page .auth-card { padding: 28px 22px; border-radius: 24px; }
+    .login-page .subtitle { margin-bottom: 18px; }
+    .login-page .primary-button { padding: 13px 14px; }
 }

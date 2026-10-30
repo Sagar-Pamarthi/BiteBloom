@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.tap.model.Order_item;
 
-public interface Order_itemDAO {
+public interface OrderItemDAO {
 
 	void addOrder_item(Order_item order_item);
 	Order_item getOrderItem(int orderitem_id);

@@ -15,5 +15,11 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/mysql-connector-j-9.2.0.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jbcrypt-0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Lenovo/Downloads/angus-activation-2.0.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Lenovo/Downloads/jakarta.activation-api-2.1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Lenovo/Downloads/angus-mail-2.0.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Lenovo/Downloads/jakarta.mail-api-2.1.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Lenovo/Downloads/jakarta.servlet.jsp.jstl-3.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Lenovo/Downloads/jakarta.servlet.jsp.jstl-api-3.0.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

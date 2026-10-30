@@ -11,4 +11,5 @@ public interface RestaurantDAO {
 	void updateRestaurant(Restaurant restaurant);
 	void deleteRestaurant(int restaurant_id);
 	List<Restaurant> getAllRestaurants();
+	List<Restaurant> getRestaurantsByFoodCategoryAndSearch(String foodCategory, String search);        
 }

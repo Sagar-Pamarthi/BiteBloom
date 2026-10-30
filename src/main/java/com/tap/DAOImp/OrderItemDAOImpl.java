@@ -8,11 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.tap.DAO.Order_itemDAO;
+import com.tap.DAO.OrderItemDAO;
 import com.tap.model.Order_item;
 import com.tap.util.DBConnection;
 
-public class OrderItemDAOImpl implements Order_itemDAO{
+public class OrderItemDAOImpl implements OrderItemDAO{
 
 	private static final String INSERT_QUERY = "INSERT INTO order_item(order_id, menu_id, quantity, item_total) VALUES(?,?,?,?)";
 	

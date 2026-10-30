@@ -1,752 +1,96 @@
-<%@ page language="java"
-    contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+    String contextPath = request.getContextPath();
+    Object orderIdObject = session.getAttribute("recentOrderId");
+
+    if (orderIdObject == null) {
+        response.sendRedirect(contextPath + "/restaurants");
+        return;
+    }
+  
+%>
 
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
-<meta charset="UTF-8">
-
-<title>Order Placed Successfully</title>
-
-
-<link rel="preconnect"
-      href="https://fonts.googleapis.com">
-
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet">
-
-
-<style>
-
-
-* {
-
-    margin: 0;
-
-    padding: 0;
-
-    box-sizing: border-box;
-
-    font-family: 'Poppins', sans-serif;
-
-}
-
-
-
-body {
-
-    min-height: 100vh;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    background: linear-gradient(
-        135deg,
-        #FFF8F2,
-        #FFE8D6,
-        #FFF4EC
-    );
-
-    overflow: hidden;
-
-}
-
-
-
-/* Background Floating Circles */
-
-
-.circle {
-
-    position: absolute;
-
-    border-radius: 50%;
-
-    opacity: .18;
-
-    animation: float 8s ease-in-out infinite;
-
-}
-
-
-
-.circle1 {
-
-    width: 180px;
-
-    height: 180px;
-
-    background: #FF7A00;
-
-    top: -50px;
-
-    left: -50px;
-
-}
-
-
-
-.circle2 {
-
-    width: 140px;
-
-    height: 140px;
-
-    background: #FFB347;
-
-    bottom: -30px;
-
-    right: -30px;
-
-    animation-delay: 2s;
-
-}
-
-
-
-.circle3 {
-
-    width: 90px;
-
-    height: 90px;
-
-    background: #FF9800;
-
-    top: 15%;
-
-    right: 10%;
-
-    animation-delay: 4s;
-
-}
-
-
-
-@keyframes float {
-
-
-    0%,100% {
-
-        transform: translateY(0);
-
-    }
-
-
-    50% {
-
-        transform: translateY(-15px);
-
-    }
-
-}
-
-
-
-/* Success Card */
-
-
-.success-card {
-
-    width: 430px;
-
-    max-width: 88%;
-
-
-    background: white;
-
-
-    border-radius: 20px;
-
-
-    padding: 35px 30px;
-
-
-    text-align: center;
-
-
-    position: relative;
-
-
-    box-shadow:
-        0 12px 30px rgba(0,0,0,.10);
-
-
-    animation: cardShow .8s ease;
-
-}
-
-
-
-@keyframes cardShow {
-
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(40px)
-            scale(.9);
-
-    }
-
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0)
-            scale(1);
-
-    }
-
-}
-
-
-
-
-/* Success Check Animation */
-
-
-.check-container {
-
-    width: 90px;
-
-    height: 90px;
-
-
-    margin: auto;
-
-    margin-bottom: 18px;
-
-
-    border-radius: 50%;
-
-
-    background: #E8F8EC;
-
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-
-    animation: pop .8s ease;
-
-}
-
-
-
-@keyframes pop {
-
-
-    0% {
-
-        transform: scale(0);
-
-    }
-
-
-    70% {
-
-        transform: scale(1.1);
-
-    }
-
-
-    100% {
-
-        transform: scale(1);
-
-    }
-
-}
-
-
-
-.checkmark {
-
-    width: 42px;
-
-    height: 22px;
-
-
-    border-left:
-        6px solid #2E7D32;
-
-
-    border-bottom:
-        6px solid #2E7D32;
-
-
-    transform: rotate(-45deg);
-
-
-    animation:
-        tick .7s .5s forwards;
-
-
-    opacity: 0;
-
-}
-
-
-
-@keyframes tick {
-
-
-    from {
-
-        width: 0;
-
-        height: 0;
-
-        opacity: 0;
-
-    }
-
-
-    to {
-
-        width: 42px;
-
-        height: 22px;
-
-        opacity: 1;
-
-    }
-
-}
-
-
-
-
-
-/* Text */
-
-
-h1 {
-
-    color: #3E2723;
-
-    margin-bottom: 12px;
-
-    font-size: 28px;
-
-    font-weight: 600;
-
-}
-
-
-
-p {
-
-    color: #777;
-
-    line-height: 1.6;
-
-    font-size: 15px;
-
-    margin-bottom: 22px;
-
-}
-
-
-
-/* Food Icons */
-
-
-.food {
-
-    font-size: 32px;
-
-    margin: 10px 0 25px;
-
-    animation: bounce 2s infinite;
-
-}
-
-
-
-@keyframes bounce {
-
-
-    0%,100% {
-
-        transform: translateY(0);
-
-    }
-
-
-    50% {
-
-        transform: translateY(-8px);
-
-    }
-
-}
-
-
-
-
-/* Buttons */
-
-
-.buttons {
-
-    display: flex;
-
-    justify-content: center;
-
-    gap: 12px;
-
-    flex-wrap: wrap;
-
-}
-
-
-
-.btn {
-
-    padding: 12px 22px;
-
-    border-radius: 30px;
-
-    text-decoration: none;
-
-    font-size: 15px;
-
-    font-weight: 600;
-
-    transition: .3s;
-
-}
-
-
-
-
-.primary {
-
-    background: #FF7A00;
-
-    color: white;
-
-}
-
-
-
-.primary:hover {
-
-    background: #F26C00;
-
-    transform: translateY(-3px);
-
-    box-shadow:
-        0 8px 15px rgba(255,122,0,.3);
-
-}
-
-
-
-.secondary {
-
-    border: 2px solid #FF7A00;
-
-    color: #FF7A00;
-
-    background: white;
-
-}
-
-
-
-.secondary:hover {
-
-    background: #FFF3EA;
-
-    transform: translateY(-3px);
-
-}
-
-
-
-
-/* Confetti */
-
-
-.confetti {
-
-    position: absolute;
-
-    width: 8px;
-
-    height: 15px;
-
-    top: -30px;
-
-    animation:
-        fall 4s linear infinite;
-
-}
-
-
-
-@keyframes fall {
-
-
-    0% {
-
-        transform:
-            translateY(-100px)
-            rotate(0deg);
-
-        opacity: 1;
-
-    }
-
-
-    100% {
-
-        transform:
-            translateY(900px)
-            rotate(720deg);
-
-        opacity: 0;
-
-    }
-
-}
-
-
-
-
-/* Mobile Responsive */
-
-
-@media(max-width:600px) {
-
-
-    .success-card {
-
-        width: 95%;
-
-        padding: 28px 20px;
-
-    }
-
-
-
-    h1 {
-
-        font-size: 24px;
-
-    }
-
-
-
-    .food {
-
-        font-size: 28px;
-
-    }
-
-
-
-    .buttons {
-
-        flex-direction: column;
-
-    }
-
-
-
-    .btn {
-
-        width: 100%;
-
-    }
-
-}
-
-
-
-</style>
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#30171f">
+    <title>BiteBloom | Order Confirmed</title>
+	<link rel="icon"
+          type="image/png"
+          href="<%= request.getContextPath() %>/images/bitebloom-favicon.png">
+    <link rel="stylesheet" href="<%= contextPath %>/css/common.css">
+    <link rel="stylesheet" href="<%= contextPath %>/css/order-confirmation.css">
 </head>
+<body class="order-confirmation-body">
 
-
-
-<body>
-
-
-<!-- Background Circles -->
-
-
-<div class="circle circle1"></div>
-
-<div class="circle circle2"></div>
-
-<div class="circle circle3"></div>
-
-
-
-
-<!-- Confetti Animation -->
-
-
-	<%
-	String[] colors = {
-
-	    "#FF7A00",
-	    "#4CAF50",
-	    "#FFB347",
-	    "#FF5252",
-	    "#2196F3",
-	    "#FFD54F"
-
-	};
-
-	for (int i = 0; i < 20; i++) {
-	%>
-
-
-	<div class="confetti"
-		style="
-
-		left:<%=(int) (Math.random() * 100)%>%;
-		
-		background:<%=colors[(int) (Math.random() * colors.length)]%>;
-		
-		animation-delay:<%=Math.random() * 3%>s;
-		
-		animation-duration:<%=3 + Math.random() * 2%>s;
-		
-		">
-
-	</div>
-
-
-	<%
-	}
-	%>
-
-
-
-
-
-	<!-- Success Card -->
-
-
-<div class="success-card">
-
-
-
-    <!-- Animated Check -->
-
-
-    <div class="check-container">
-
-        <div class="checkmark"></div>
-
+<main class="confirmation-stage">
+    <!-- Brand-colour confetti stays decorative and never blocks the buttons. -->
+    <div class="confirmation-confetti" aria-hidden="true">
+        <span class="confetti-piece confetti-piece-1"></span>
+        <span class="confetti-piece confetti-piece-2"></span>
+        <span class="confetti-piece confetti-piece-3"></span>
+        <span class="confetti-piece confetti-piece-4"></span>
+        <span class="confetti-piece confetti-piece-5"></span>
+        <span class="confetti-piece confetti-piece-6"></span>
+        <span class="confetti-piece confetti-piece-7"></span>
+        <span class="confetti-piece confetti-piece-8"></span>
+        <span class="confetti-piece confetti-piece-9"></span>
+        <span class="confetti-piece confetti-piece-10"></span>
+        <span class="confetti-piece confetti-piece-11"></span>
+        <span class="confetti-piece confetti-piece-12"></span>
     </div>
 
+    <section class="confirmation-card" aria-labelledby="confirmation-title">
+
+        <div class="confirmation-mark-wrap">
+            <span class="mark-glow" aria-hidden="true"></span>
+            <img class="confirmation-mark"
+                 src="<%= contextPath %>/images/Check mark golden.svg"
+                 alt="Order confirmed">
+        </div>
 
 
+        <p class="confirmation-eyebrow">MADE WITH CARE, JUST FOR YOU</p>
+        <h1 id="confirmation-title">Order Placed<br><span>Successfully!</span></h1>
+        <p class="confirmation-message">
+            Thank you for ordering with us,
+            Your order is confirmed and ready for the kitchen to get started.
+        </p>
 
+        <!-- Elegant line icons and a real status sequence. -->
+        <div class="confirmation-journey" aria-label="Order journey">
+            <div class="journey-item is-current">
+                <span class="journey-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" focusable="false"><rect x="5" y="3" width="14" height="18" rx="2"></rect><path d="M9 8h6M9 12h6M9 16h4"></path></svg>
+                </span>
+                <span class="journey-label">Order placed</span>
+            </div>
+            <span class="journey-line" aria-hidden="true"></span>
+            <div class="journey-item">
+                <span class="journey-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" focusable="false"><path d="M3 14h18l-1.7-4.3A3 3 0 0 0 16.5 8h-9A3 3 0 0 0 4.7 9.7L3 14Z"></path><path d="M4 14v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3M8 8c0-1.2.8-2 2-2M13 8c0-1.2.8-2 2-2"></path></svg>
+                </span>
+                <span class="journey-label">Prepared</span>
+            </div>
+            <span class="journey-line" aria-hidden="true"></span>
+            <div class="journey-item">
+                <span class="journey-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" focusable="false"><circle cx="6" cy="17" r="2.5"></circle><circle cx="18" cy="17" r="2.5"></circle><path d="M8.5 17H14l2-6h3l2 6M14 17l-3-6H7l-2 4M11 11H8"></path></svg>
+                </span>
+                <span class="journey-label">On its way</span>
+            </div>
+        </div>
+        <p class="confirmation-footnote">Your order status will update as the restaurant processes your order.</p>
 
-    <h1>
-
-        Order Placed Successfully!
-
-    </h1>
-
-
-
-
-
-    <p>
-
-        Thank you for ordering with us.
-
-        <br>
-
-        Your delicious meal is now being prepared.
-
-        <br><br>
-
-        You can check your order status anytime from
-
-        <strong>My Orders</strong>.
-
-    </p>
-
-
-
-
-
-
-    <!-- Food Animation -->
-
-
-    <div class="food">
-
-        🍔 &nbsp; 🍕 &nbsp; 🍟 &nbsp; 🥤
-
-    </div>
-
-
-
-
-
-
-
-    <!-- Buttons -->
-
-
-    <div class="buttons">
-
-
-
-        <a href="<%=request.getContextPath()%>/OrdersController"
-
-           class="btn primary">
-
-            My Orders
-
-        </a>
-
-
-
-
-        <a href="<%=request.getContextPath()%>/RestaurantServlet"
-
-           class="btn secondary">
-
-            Continue Shopping
-
-        </a>
-
-
-
-    </div>
-
-
-
-</div>
-
-
+        <div class="confirmation-actions">
+            <a class="confirmation-primary-action" href="<%= contextPath %>/orders">My Orders <span aria-hidden="true">→</span></a>
+            <a class="confirmation-secondary-action" href="<%= contextPath %>/restaurants">Continue Ordering</a>
+        </div>
+        <p class="confirmation-reassurance"><span aria-hidden="true">✦</span> Good food. Happy moments.</p>
+    </section>
+</main>
 
 </body>
-
 </html>

@@ -25,7 +25,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 
-@WebServlet("/OrdersController")
+@WebServlet("/orders")
 public class OrdersController extends HttpServlet {
 
 
